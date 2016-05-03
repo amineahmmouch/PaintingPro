@@ -17,7 +17,6 @@ import android.widget.Button;
 public class Home extends Activity implements LocationListener {
 
     protected LocationManager _locationManager = null;
-    protected LocationListener _locationListener = null;
     protected Location _myLastLocation = null;
 
     protected void onCreate(Bundle savedInstanceState) {
