@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PaintingPro</string>
+    <string name="reference">Référence :</string>
+    <string name="application">Application au :</string>
+    <string name="diluted">Diluable au :</string>
+    <string name="cov">COV :</string>
+    <string name="emission">Taux d'emission :</string>
+
+    <string-array name="agencies_coordinates">
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="agencies_phones">
+        <item>+334434343434</item>
+        <item>+335534343434</item>
+        <item>+336634343434</item>
+    </string-array>
+</resources>

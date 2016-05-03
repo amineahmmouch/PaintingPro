@@ -1,0 +1,9 @@
+{
+  "products": [{
+    "reference": "PBX0226",
+    "application": "Rouleau",
+    "diluted": "Eau",
+    "cov": "0,5",
+    "emmission": "A++"
+  }]
+}
