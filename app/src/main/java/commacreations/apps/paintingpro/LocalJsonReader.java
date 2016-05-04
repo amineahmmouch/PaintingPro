@@ -39,7 +39,7 @@ public class LocalJsonReader {
                 productMap.put("application", application);
                 productMap.put("diluted", diluted);
                 productMap.put("cov", cov);
-                productMap.put("emmission", emmission);
+                productMap.put("emission", emmission);
             }
         } catch (JSONException e) {
             e.printStackTrace();

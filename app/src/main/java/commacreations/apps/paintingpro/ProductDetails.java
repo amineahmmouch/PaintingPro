@@ -1,6 +1,9 @@
 package commacreations.apps.paintingpro;
 
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +22,7 @@ import java.util.HashMap;
 public class ProductDetails extends AppCompatActivity {
 
     private String _productReference = "";
+    private String _agencyPhoneNumber = "+33445667788";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +77,18 @@ public class ProductDetails extends AppCompatActivity {
         Button purchaseProductButton = (Button)findViewById(R.id.purchaseProductButton);
         purchaseProductButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + getMyPhoneNumber()));
-                intent.putExtra("sms_body", "Référence : " + _productReference + "\n" + "Numéro de téléphone : " + getMyPhoneNumber());
-                startActivity(intent);
+                String phoneNumber = getMyPhoneNumber();
+                if (phoneNumber == null) {
+                    phoneNumber = "+334422222222";
+                }
+                Intent smsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + _agencyPhoneNumber));
+                smsIntent.putExtra("sms_body", "Référence : " + _productReference + "\n" + "Numéro de téléphone : " + phoneNumber);
+                try {
+                    startActivity(smsIntent);
+                } catch (ActivityNotFoundException e) {
+                    // SMS functionnality doesnt exist.
+                    showAlertMessageThisFunctionnalityDoesntExist();
+                }
             }
         });
     }
@@ -83,6 +96,19 @@ public class ProductDetails extends AppCompatActivity {
     private String getMyPhoneNumber() {
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         return telephonyManager.getLine1Number();
+    }
+
+    private void showAlertMessageThisFunctionnalityDoesntExist() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Cette fonctionnalite n'existe pas dans votre appareil.")
+                .setCancelable(false)
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override

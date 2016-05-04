@@ -2,6 +2,7 @@ package commacreations.apps.paintingpro;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,30 +15,45 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class Home extends Activity implements LocationListener {
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
+import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
+import com.google.android.gms.location.LocationClient;
+
+import static android.location.LocationManager.GPS_PROVIDER;
+
+public class Home extends Activity implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
 
     protected LocationManager _locationManager = null;
-    protected Location _myLastLocation = null;
+    protected LocationClient _locationClient = null;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        initialiseLocationManager();
+        // Create the LocationRequest object.
+        _locationClient = new LocationClient(this, this, this);
+
+        _locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        _locationManager.requestLocationUpdates(GPS_PROVIDER, 0, 0, this);
+
         addListenerOnScannerButton();
         addListenerOnCallAgencyButton();
 
     }
 
-    public void initialiseLocationManager() {
-        _locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        _locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+    public void getUserLocation() {
+        Location currentLocation = _locationClient.getLastLocation();
+        String msg = Double.toString(currentLocation.getLatitude()) + "," +
+                Double.toString(currentLocation.getLongitude());
+        Log.i("currentLocation", msg);
+        getNearestAgency(currentLocation);
     }
 
     private void addListenerOnScannerButton() {
-        Button sendInfosButton = (Button)findViewById(R.id.scannerButton);
-        sendInfosButton.setOnClickListener(new View.OnClickListener() {
+        Button scannerButton = (Button)findViewById(R.id.scannerButton);
+        scannerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent();
                 i.setClass(Home.this, ProductDetails.class);
@@ -47,13 +63,13 @@ public class Home extends Activity implements LocationListener {
     }
 
     private void addListenerOnCallAgencyButton() {
-        Button sendInfosButton = (Button)findViewById(R.id.scannerButton);
-        sendInfosButton.setOnClickListener(new View.OnClickListener() {
+        Button callAgencyButton = (Button)findViewById(R.id.callAgencyButton);
+        callAgencyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (!_locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+                if (!_locationManager.isProviderEnabled(GPS_PROVIDER)) {
                     showAlertMessageGpsIsDisabled();
                 } else {
-                    getNearestAgency(_myLastLocation);
+                    getUserLocation();
                 }
             }
         });
@@ -75,34 +91,53 @@ public class Home extends Activity implements LocationListener {
                 lastDistance = newDistance;
                 index = i;
             }
+            Log.i("Distance", "" + newDistance);
         }
+        Log.i("index", "" + index);
         callNearestAgency(agenciesPhones[index]);
     }
 
     private void callNearestAgency(String phoneNumber) {
         Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse(phoneNumber));
-        startActivity(callIntent);
+        try {
+            startActivity(callIntent);
+        } catch (ActivityNotFoundException e) {
+            // CALL functionnality doesnt exist.
+            showAlertMessageThisFunctionnalityDoesntExist();
+        }
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-        _myLastLocation = new Location(location);
-        Log.i("Coordinates : ", location.getLatitude() + " " + location.getLongitude());
+    protected void onStart() {
+        super.onStart();
+
+        // Connect the client.
+        _locationClient.connect();
     }
 
     @Override
-    public void onProviderDisabled(String provider) {
-
+    protected void onStop() {
+        // Disconnect the client.
+        _locationClient.disconnect();
+        super.onStop();
     }
 
     @Override
-    public void onProviderEnabled(String provider) {
-
+    public void onConnected(Bundle dataBundle) {
+        // Display the connection status.
+        //Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
+    public void onDisconnected() {
+        // Display the connection status.
+        //Toast.makeText(this, "Disconnected. Please re-connect.",Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        // Display the error code on failure.
+        //Toast.makeText(this, "Connection Failure : " + connectionResult.getErrorCode(),Toast.LENGTH_SHORT).show();
     }
 
     private void showAlertMessageGpsIsDisabled() {
@@ -114,7 +149,7 @@ public class Home extends Activity implements LocationListener {
                         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                     }
                 })
-                .setNegativeButton("Oui", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         dialog.cancel();
                     }
@@ -123,4 +158,36 @@ public class Home extends Activity implements LocationListener {
         alert.show();
     }
 
+    private void showAlertMessageThisFunctionnalityDoesntExist() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Cette fonctionnalite n'existe pas dans votre appareil.")
+                .setCancelable(false)
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 }

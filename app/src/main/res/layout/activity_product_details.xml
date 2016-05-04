@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@color/dark_blue"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <LinearLayout
@@ -145,15 +146,16 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/purchaseProductButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:layout_marginTop="5dip"
+            android:textAllCaps="false"
+            android:layout_gravity="center|bottom"
+            android:textSize="24dip"
+            android:text="Commander le produit" />
 
-    <Button
-        android:id="@+id/purchaseProductButton"
-        android:layout_width="match_parent"
-        android:layout_height="50dip"
-        android:layout_marginTop="5dip"
-        android:layout_gravity="center|bottom"
-        android:textSize="24dip"
-        android:text="Commander le produit" />
+    </LinearLayout>
 	
 </LinearLayout>
