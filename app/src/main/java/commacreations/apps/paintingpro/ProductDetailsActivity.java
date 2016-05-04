@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
-public class ProductDetails extends AppCompatActivity {
+public class ProductDetailsActivity extends AppCompatActivity {
 
     private String _productReference = "";
     private String _agencyPhoneNumber = "+33445667788";

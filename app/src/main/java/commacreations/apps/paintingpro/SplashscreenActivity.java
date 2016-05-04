@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
-public class Splashscreen extends Activity {
+public class SplashscreenActivity extends Activity {
 
     protected int _splashTime = 4000;
     private Thread _splashTread;
@@ -26,7 +26,7 @@ public class Splashscreen extends Activity {
                 finally {
                     finish();
                     Intent i = new Intent();
-                    i.setClass(Splashscreen.this, Home.class);
+                    i.setClass(SplashscreenActivity.this, HomeActivity.class);
                     startActivity(i);
                 }
             }
