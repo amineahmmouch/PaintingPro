@@ -11,6 +11,10 @@
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Black.NoTitleBar">
+        <meta-data android:name="DATABASE" android:value="paintingpro.db" />
+        <meta-data android:name="VERSION" android:value="1" />
+        <meta-data android:name="QUERY_LOG" android:value="true" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="commacreations.apps.paintingpro" />
         <activity
             android:name="commacreations.apps.paintingpro.Splashscreen"
             android:label="@string/app_name"
