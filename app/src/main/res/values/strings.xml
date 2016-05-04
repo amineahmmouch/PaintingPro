@@ -17,4 +17,12 @@
         <item>+335534343434</item>
         <item>+336634343434</item>
     </string-array>
+
+    <string-array name="product_categories">
+        <item>BTP</item>
+        <item>Aeronotique</item>
+        <item>Interieur</item>
+        <item>Sols</item>
+        <item>Voitures</item>
+    </string-array>
 </resources>
