@@ -40,6 +40,7 @@
             android:id="@+id/autoCompleteTextView"
             android:layout_width="fill_parent"
             android:layout_height="50dip"
+            android:hint="Recherche de produit.."
             android:layout_marginTop="10dip" />
 
         <LinearLayout

@@ -9,17 +9,17 @@ public class Product extends SugarRecord {
     String application;
     String diluted;
     String cov;
-    String emmission;
+    String emission;
 
     public Product() {
     }
 
-    public Product(String reference, String category, String application, String diluted, String cov, String emmission) {
+    public Product(String reference, String category, String application, String diluted, String cov, String emission) {
         this.reference = reference;
         this.category = category;
         this.application = category;
         this.diluted = category;
         this.cov = cov;
-        this.emmission = emmission;
+        this.emission = emission;
     }
 }

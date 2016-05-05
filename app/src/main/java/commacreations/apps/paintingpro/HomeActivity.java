@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static android.location.LocationManager.GPS_PROVIDER;
 
@@ -65,11 +64,6 @@ public class HomeActivity extends Activity implements ConnectionCallbacks, OnCon
             editor.commit();
 
             addProductsToLocalDatabase();
-        } else {
-            List<Product> products = Product.findWithQuery(Product.class, "Select * from Product");
-            for (int i = 0; i < products.size(); i++) {
-                Log.i("products", "" + products.get(i).reference);
-            }
         }
     }
 
@@ -109,6 +103,7 @@ public class HomeActivity extends Activity implements ConnectionCallbacks, OnCon
                 Intent i = new Intent();
                 i.setClass(HomeActivity.this, ProductDetailsActivity.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.right_in, R.anim.stable);
             }
         });
     }
@@ -120,6 +115,7 @@ public class HomeActivity extends Activity implements ConnectionCallbacks, OnCon
                 Intent i = new Intent();
                 i.setClass(HomeActivity.this, ProductSearchActivity.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.right_in, R.anim.stable);
             }
         });
     }
