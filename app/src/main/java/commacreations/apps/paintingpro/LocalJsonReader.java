@@ -6,13 +6,15 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LocalJsonReader {
 
     // Method to get informations from a json file from assets directory.
-    public HashMap getDataFromJsonFile(InputStream is) {
+    public ArrayList getDataFromJsonFile(InputStream is) {
 
+        ArrayList<HashMap<String, String>> productsList = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> productMap = null;
 
         try {
@@ -20,14 +22,15 @@ public class LocalJsonReader {
             JSONObject objects = new JSONObject(loadJSON(is));
 
             // Get array of objects (in this case there is one).
-            JSONArray products_array = objects.getJSONArray("products");
+            JSONArray productsArray = objects.getJSONArray("products");
 
             // Get all values of products and store them in an HashMap as a key value.
-            for (int i = 0; i < products_array.length(); i++) {
+            for (int i = 0; i < productsArray.length(); i++) {
 
                 // Get product infos one by one.
-                JSONObject object = products_array.getJSONObject(i);
+                JSONObject object = productsArray.getJSONObject(i);
                 String reference = object.getString("reference");
+                String category = object.getString("category");
                 String application = object.getString("application");
                 String diluted = object.getString("diluted");
                 String cov = object.getString("cov");
@@ -36,16 +39,19 @@ public class LocalJsonReader {
                 // Add values in hashmap.
                 productMap = new HashMap<String, String>();
                 productMap.put("reference", reference);
+                productMap.put("category", reference);
                 productMap.put("application", application);
                 productMap.put("diluted", diluted);
                 productMap.put("cov", cov);
                 productMap.put("emission", emmission);
+
+                productsList.add(productMap);
             }
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
         }
-        return productMap;
+        return productsList;
     }
 
     // Method to parse json file and return infos as a string.

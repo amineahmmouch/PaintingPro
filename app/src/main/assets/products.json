@@ -1,9 +1,80 @@
 {
   "products": [{
-    "reference": "PBX0226",
+    "reference": "BB1202",
+    "category": "BTP",
+    "application": "Rouleau",
+    "diluted": "Eau",
+    "cov": "0,7",
+    "emmission": "B++"
+  },{
+    "reference": "BG0033",
+    "category": "BTP",
+    "application": "Rouleau",
+    "diluted": "Eau",
+    "cov": "0,2",
+    "emmission": "C"
+  },{
+    "reference": "AM1888",
+    "category": "Aéronotique",
+    "application": "Rouleau",
+    "diluted": "Eau",
+    "cov": "0,9",
+    "emmission": "A"
+  },{
+    "reference": "AJ2600",
+    "category": "Aéronotique",
+    "application": "Brosse",
+    "diluted": "Solvant",
+    "cov": "0.1",
+    "emmission": "B++"
+  },{
+    "reference": "AJ3602",
+    "category": "Aéronotique",
+    "application": "Brosse",
+    "diluted": "Eau",
+    "cov": "0.1",
+    "emmission": "B++"
+  },{
+    "reference": "IB1111",
+    "category": "Intérieur",
     "application": "Rouleau",
     "diluted": "Eau",
     "cov": "0,5",
+    "emmission": "A"
+  },{
+    "reference": "IJ0001",
+    "category": "Intérieur",
+    "application": "Brosse",
+    "diluted": "Eau",
+    "cov": "0,5",
     "emmission": "A++"
+  },{
+    "reference": "IB1001",
+    "category": "Intérieur",
+    "application": "Rouleau",
+    "diluted": "Eau",
+    "cov": "0,5",
+    "emmission": "A"
+  },{
+    "reference": "SJ9901",
+    "category": "Sols",
+    "application": "Brosse",
+    "diluted": "Eau",
+    "cov": "0",
+    "emmission": "C"
+  },{
+    "reference": "VJR0009",
+    "category": "Voitures",
+    "application": "Brosse",
+    "diluted": "Solvant",
+    "cov": "1",
+    "emmission": "C++"
+  },{
+    "reference": "VR0007",
+    "category": "Voitures",
+    "application": "Brosse",
+    "diluted": "Eau",
+    "cov": "1",
+    "emmission": "C"
   }]
 }

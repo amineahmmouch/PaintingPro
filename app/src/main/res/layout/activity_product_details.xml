@@ -45,6 +45,30 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dip">
+
+            <TextView
+                android:id="@+id/categoryLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dip"
+                android:layout_marginLeft="10dip"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:text="@string/category" />
+
+            <TextView
+                android:id="@+id/categoryValueTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dip"
+                android:layout_marginLeft="10dip"
+                android:textColor="@color/dark_blue"
+                android:textSize="15sp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -128,7 +152,7 @@
             android:layout_marginTop="10dip">
 
             <TextView
-                android:id="@+id/emmissionLabelTextView"
+                android:id="@+id/emissionLabelTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="30dip"
                 android:layout_marginLeft="10dip"

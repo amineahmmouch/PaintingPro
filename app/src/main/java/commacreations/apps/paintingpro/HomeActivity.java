@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -19,6 +20,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
 import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationClient;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import static android.location.LocationManager.GPS_PROVIDER;
 
@@ -38,9 +45,52 @@ public class HomeActivity extends Activity implements ConnectionCallbacks, OnCon
         _locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         _locationManager.requestLocationUpdates(GPS_PROVIDER, 0, 0, this);
 
+        checkFirstTimeLaunchToAddProductsToDatabase();
         addListenerOnScannerButton();
         addListenerOnCallAgencyButton();
 
+    }
+
+    private void checkFirstTimeLaunchToAddProductsToDatabase() {
+        boolean firstRun = false;
+
+        SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+        firstRun = settings.getBoolean("FIRST_RUN", false);
+        if (!firstRun) {
+            // do the thing for the first time
+            settings = getSharedPreferences("PREFS_NAME", 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("FIRST_RUN", true);
+            editor.commit();
+
+            addProductsToLocalDatabase();
+        } else {
+            List<Product> products = Product.findWithQuery(Product.class, "Select * from Product");
+            for (int i = 0; i < products.size(); i++) {
+                Log.i("products", "" + products.get(i).reference);
+            }
+        }
+    }
+
+    // Add products from local json file to local database.
+    private void addProductsToLocalDatabase() {
+        LocalJsonReader localJsonReader = new LocalJsonReader();
+        try {
+            InputStream is = getAssets().open("products.json");
+            ArrayList<HashMap<String, String>> productsList = localJsonReader.getDataFromJsonFile(is);
+            for (int i = 0; i < productsList.size(); i++) {
+                Log.i("reference", (String) productsList.get(i).get("reference"));
+                Product product = new Product((String) productsList.get(i).get("reference"),
+                        (String) productsList.get(i).get("category"),
+                        (String) productsList.get(i).get("application"),
+                        (String) productsList.get(i).get("diluted"),
+                        (String) productsList.get(i).get("cov"),
+                        (String) productsList.get(i).get("emission"));
+                product.save();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void getUserLocation() {

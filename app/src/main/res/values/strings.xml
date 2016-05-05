@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">PaintingPro</string>
     <string name="reference">Référence :</string>
+    <string name="category">Catégorie :</string>
     <string name="application">Application au :</string>
     <string name="diluted">Diluable au :</string>
     <string name="cov">COV :</string>
@@ -20,8 +21,8 @@
 
     <string-array name="product_categories">
         <item>BTP</item>
-        <item>Aeronotique</item>
-        <item>Interieur</item>
+        <item>Aéronotique</item>
+        <item>Intérieur</item>
         <item>Sols</item>
         <item>Voitures</item>
     </string-array>

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProductDetailsActivity extends AppCompatActivity {
@@ -59,18 +60,21 @@ public class ProductDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void showProductDetails(HashMap productMap) {
+    // Show first product details as an example.
+    private void showProductDetails(ArrayList<HashMap<String, String>> productsList) {
         TextView referenceValueTextView = (TextView)findViewById(R.id.referenceValueTextView);
+        TextView categoryValueTextView = (TextView)findViewById(R.id.categoryValueTextView);
         TextView applicationValueTextView = (TextView)findViewById(R.id.applicationValueTextView);
         TextView dilutedTextView = (TextView)findViewById(R.id.dilutedValueTextView);
         TextView covValueTextView = (TextView)findViewById(R.id.covValueTextView);
         TextView emissionValueTextView = (TextView)findViewById(R.id.emissionValueTextView);
-        _productReference = (String) productMap.get("reference");
-        referenceValueTextView.setText((String) productMap.get("reference"));
-        applicationValueTextView.setText((String) productMap.get("application"));
-        dilutedTextView.setText((String) productMap.get("diluted"));
-        covValueTextView.setText((String) productMap.get("cov"));
-        emissionValueTextView.setText((String) productMap.get("emission"));
+        _productReference = (String) productsList.get(0).get("reference");
+        referenceValueTextView.setText((String) productsList.get(0).get("reference"));
+        categoryValueTextView.setText((String) productsList.get(0).get("category"));
+        applicationValueTextView.setText((String) productsList.get(0).get("application"));
+        dilutedTextView.setText((String) productsList.get(0).get("diluted"));
+        covValueTextView.setText((String) productsList.get(0).get("cov"));
+        emissionValueTextView.setText((String) productsList.get(0).get("emission"));
     }
 
     private void addListenerOnPurchaseProductButton() {

@@ -18,7 +18,7 @@
             android:layout_gravity="center"
             android:background="@color/dark_blue"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:text="Scanner" />
 
         <Button
@@ -29,7 +29,7 @@
             android:layout_gravity="center"
             android:background="@color/dark_blue"
             android:textColor="@color/white"
-            android:textSize="24dip"
+            android:textSize="22sp"
             android:text="Recherche" />
 
         <Button
@@ -40,7 +40,7 @@
             android:layout_gravity="center"
             android:background="@color/dark_blue"
             android:textColor="@color/white"
-            android:textSize="24dip"
+            android:textSize="22sp"
             android:text="Appeler une agence" />
 
     </LinearLayout>

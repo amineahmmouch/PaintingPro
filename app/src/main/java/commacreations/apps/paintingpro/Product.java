@@ -8,14 +8,13 @@ public class Product extends SugarRecord {
     String category;
     String application;
     String diluted;
-    float cov;
+    String cov;
     String emmission;
 
     public Product() {
-        super();
     }
 
-    public Product(String reference, String category, String application, String diluted, float cov, String emmission) {
+    public Product(String reference, String category, String application, String diluted, String cov, String emmission) {
         this.reference = reference;
         this.category = category;
         this.application = category;
