@@ -7,8 +7,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
@@ -19,6 +19,7 @@ import java.util.List;
 public class ProductSearchActivity extends AppCompatActivity implements OnItemSelectedListener {
 
     private String[] _productCategories = null;
+    private AutoCompleteTextView _autoCompleteTextView = null;
     private TextView _referenceValueTextView = null;
     private TextView _categoryValueTextView = null;
     private TextView _applicationValueTextView = null;
@@ -26,13 +27,15 @@ public class ProductSearchActivity extends AppCompatActivity implements OnItemSe
     private TextView _covValueTextView = null;
     private TextView _emissionValueTextView = null;
 
+    boolean _firstExecution = false;
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_search);
 
         setToolBar();
-        initialiseProductsDetailsTextViews();
+        initialiseComponents();
         setupCategoryChoiceSpinner();
         setupAutoCompleteTextViewSearch("BTP");
     }
@@ -67,29 +70,27 @@ public class ProductSearchActivity extends AppCompatActivity implements OnItemSe
     }
 
     private void setupAutoCompleteTextViewSearch(String category) {
-        AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         List<Product> products = Product.find(Product.class, "category = ?", category);
-        //List<Product> products = Product.findWithQuery(Product.class, "Select * from Product where Category = ?", category);
+        Log.i("category", category);
         String[] productsReferencesArray = new String[products.size()];
         for (int i = 0; i < products.size(); i++) {
             productsReferencesArray[i] = products.get(i).reference;
-            Log.i("products", "" + products.get(i).reference);
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, productsReferencesArray);
-        autoCompleteTextView.setAdapter(adapter);
-        autoCompleteTextView.setThreshold(1);
-        autoCompleteTextView.setOnItemClickListener(new OnItemClickListener() {
+        _autoCompleteTextView.setAdapter(adapter);
+        _autoCompleteTextView.setThreshold(1);
+        _autoCompleteTextView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
                 String reference = (String)parent.getItemAtPosition(position);
                 Log.i("selection", reference);
-                //List<Product> product = Product.find(Product.class, "Reference = ?", reference);
-                List<Product> product = Product.findWithQuery(Product.class, "Select * from Product where Reference = ?", reference);
+                List<Product> product = Product.find(Product.class, "reference = ?", reference);
                 showProductDetails(product);
             }
         });
     }
 
-    private void initialiseProductsDetailsTextViews() {
+    private void initialiseComponents() {
+        _autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         _referenceValueTextView = (TextView)findViewById(R.id.referenceValueTextView);
         _categoryValueTextView = (TextView)findViewById(R.id.categoryValueTextView);
         _applicationValueTextView = (TextView)findViewById(R.id.applicationValueTextView);
@@ -110,12 +111,23 @@ public class ProductSearchActivity extends AppCompatActivity implements OnItemSe
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         // An item was selected. You can retrieve the selected item using.
+        emptyFields();
         Log.i("selected item", _productCategories[pos]);
         setupAutoCompleteTextViewSearch(_productCategories[pos]);
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
+    }
+
+    private void emptyFields() {
+        _autoCompleteTextView.setText("");
+        _referenceValueTextView.setText("");
+        _categoryValueTextView.setText("");
+        _applicationValueTextView.setText("");
+        _dilutedTextView.setText("");
+        _covValueTextView.setText("");
+        _emissionValueTextView.setText("");
     }
 
     @Override

@@ -74,7 +74,6 @@ public class HomeActivity extends Activity implements ConnectionCallbacks, OnCon
             InputStream is = getAssets().open("products.json");
             ArrayList<HashMap<String, String>> productsList = localJsonReader.getDataFromJsonFile(is);
             for (int i = 0; i < productsList.size(); i++) {
-                Log.i("reference", (String) productsList.get(i).get("reference"));
                 Product product = new Product((String) productsList.get(i).get("reference"),
                         (String) productsList.get(i).get("category"),
                         (String) productsList.get(i).get("application"),

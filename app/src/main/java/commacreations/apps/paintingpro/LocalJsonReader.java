@@ -39,7 +39,7 @@ public class LocalJsonReader {
                 // Add values in hashmap.
                 productMap = new HashMap<String, String>();
                 productMap.put("reference", reference);
-                productMap.put("category", reference);
+                productMap.put("category", category);
                 productMap.put("application", application);
                 productMap.put("diluted", diluted);
                 productMap.put("cov", cov);

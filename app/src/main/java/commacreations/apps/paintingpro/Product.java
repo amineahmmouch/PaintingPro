@@ -17,8 +17,8 @@ public class Product extends SugarRecord {
     public Product(String reference, String category, String application, String diluted, String cov, String emission) {
         this.reference = reference;
         this.category = category;
-        this.application = category;
-        this.diluted = category;
+        this.application = application;
+        this.diluted = diluted;
         this.cov = cov;
         this.emission = emission;
     }
