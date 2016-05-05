@@ -18,12 +18,197 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/categoryChoiceLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="30dip"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:text="@string/category_choice" />
 
         <Spinner
             android:id="@+id/productCategorySpinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:layout_marginTop="10dip" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="20dip">
+
+            <TextView
+                android:id="@+id/productDetailsLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dip"
+                android:layout_marginLeft="10dip"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:text="@string/product_details" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dip">
+
+                <TextView
+                    android:id="@+id/referenceLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:text="@string/reference" />
+
+                <TextView
+                    android:id="@+id/referenceValueTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dip">
+
+                <TextView
+                    android:id="@+id/categoryLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:text="@string/category" />
+
+                <TextView
+                    android:id="@+id/categoryValueTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dip">
+
+                <TextView
+                    android:id="@+id/applicationLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:text="@string/application" />
+
+                <TextView
+                    android:id="@+id/applicationValueTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dip">
+
+                <TextView
+                    android:id="@+id/dilutedLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:text="@string/diluted" />
+
+                <TextView
+                    android:id="@+id/dilutedValueTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dip">
+
+                <TextView
+                    android:id="@+id/covLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:text="@string/cov" />
+
+                <TextView
+                    android:id="@+id/covValueTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dip">
+
+                <TextView
+                    android:id="@+id/emissionLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:text="@string/emission" />
+
+                <TextView
+                    android:id="@+id/emissionValueTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 	

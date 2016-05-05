@@ -47,6 +47,7 @@ public class HomeActivity extends Activity implements ConnectionCallbacks, OnCon
 
         checkFirstTimeLaunchToAddProductsToDatabase();
         addListenerOnScannerButton();
+        addListenerOnProductSearchButton();
         addListenerOnCallAgencyButton();
 
     }
@@ -107,6 +108,17 @@ public class HomeActivity extends Activity implements ConnectionCallbacks, OnCon
             public void onClick(View v) {
                 Intent i = new Intent();
                 i.setClass(HomeActivity.this, ProductDetailsActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void addListenerOnProductSearchButton() {
+        Button productSearchButton = (Button)findViewById(R.id.productSearchButton);
+        productSearchButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent();
+                i.setClass(HomeActivity.this, ProductSearchActivity.class);
                 startActivity(i);
             }
         });

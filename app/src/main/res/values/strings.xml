@@ -6,6 +6,8 @@
     <string name="diluted">Diluable au :</string>
     <string name="cov">COV :</string>
     <string name="emission">Taux d\'emission :</string>
+    <string name="category_choice">Choisissez une catégorie :</string>
+    <string name="product_details">Détails produit :</string>
 
     <string-array name="agencies_coordinates">
         <item>30.406331,-9.574931</item>
